@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Skillmark Résumé Analyzer</title>
+<meta name="description" content="Paste or upload a résumé to get an ATS-style score from 1 to 10, skill gaps for your target role, and line-by-line fixes. Runs entirely in the browser.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">Skill<mark>mark</mark></div>
+    <div class="tag">RÉSUMÉ ANALYZER · RUNS IN YOUR BROWSER</div>
+  </header>
+
+  <section class="hero">
+    <h1>See your résumé the way a screening bot does.</h1>
+    <p>Paste or upload a résumé. Get an ATS-style score from 1 to 10, the skills you are missing for the role, and line-by-line fixes you can make in five minutes.</p>
+    <div class="pipe" aria-label="How the analysis works"><span>Tokenize</span><span class="arr">→</span><span>Stem</span><span class="arr">→</span><span>Detect sections</span><span class="arr">→</span><span>Match skills</span><span class="arr">→</span><span>Compare to job post</span><span class="arr">→</span><span>Score</span></div>
+  </section>
+
+  <div class="grid">
+    <section class="docpane" aria-label="Résumé">
+      <div class="tools">
+        <div class="field"><label for="role">Target role</label>
+          <select id="role">
+            <option value="ml">AI / ML Engineer</option>
+            <option value="ds">Data Scientist</option>
+            <option value="da">Data Analyst</option>
+            <option value="fs">Full-Stack Developer</option>
+          </select></div>
+        <span class="spacer"></span>
+        <input type="file" id="file" accept=".txt,.md,.pdf,text/plain,application/pdf" hidden>
+        <button class="btn" id="upload" type="button">Upload .pdf / .txt</button>
+        <button class="btn primary" id="go" type="button">Analyze</button>
+      </div>
+      <div class="tabs" role="tablist">
+        <button class="tab" role="tab" id="tab-marked" aria-selected="true" aria-controls="stage">Marked up</button>
+        <button class="tab" role="tab" id="tab-edit" aria-selected="false" aria-controls="stage">Edit text</button>
+        <span class="pill" id="samplePill">Example résumé</span>
+      </div>
+      <div class="stage" id="stage">
+        <div class="marked" id="marked" tabindex="0" aria-label="Marked up résumé"><div class="beam"></div><div id="markedBody"></div></div>
+        <textarea id="resume" spellcheck="false" aria-label="Résumé text" hidden></textarea>
+      </div>
+      <div class="legend">
+        <span><span class="mk s">Skill</span> matched to the role</span>
+        <span><span class="mk n">42%</span> measurable result</span>
+        <span><span class="mk w">worked on</span> weak or filler phrase</span>
+      </div>
+      <details class="jd" id="jdBox">
+        <summary>Match against a job description (optional)</summary>
+        <textarea id="jd" placeholder="Paste the job post here. Skillmark pulls out the keywords it repeats and checks which ones your résumé is missing." aria-label="Job description"></textarea>
+      </details>
+      <div class="status" id="status" role="status"></div>
+    </section>
+
+    <section class="report" id="report" aria-live="polite">
+      <div class="empty" id="empty" hidden>
+        <h2>Nothing to score yet</h2>
+        <p>Paste your résumé text, or upload a PDF, to get a rating from 1 to 10.</p>
+      </div>
+      <div id="result" style="display:grid;gap:26px;min-width:0">
+        <div>
+          <div class="score">
+            <div class="score-num"><span id="num">0.0</span><span class="of">/ 10</span></div>
+            <div class="signal" id="signal" aria-hidden="true"></div>
+          </div>
+          <p class="verdict" id="verdict" style="margin-top:14px"></p>
+          <div class="facts" id="facts" style="margin-top:8px"></div>
+        </div>
+        <div class="sec"><h2>Where the points are <small>weight of each area in the score</small></h2><div class="rows" id="breakdown"></div></div>
+        <div class="sec"><h2>Skills <small id="skillsSub"></small></h2><div id="skills"></div></div>
+        <div class="sec" id="jdSec" hidden><h2>Job description match <small id="jdSub"></small></h2><div id="jdOut"></div></div>
+        <div class="sec"><h2>Fix these first</h2><ul class="fixes" id="fixes"></ul></div>
+        <div class="sec" id="rwSec"><h2>Sharper bullets <small>suggested rewrites, keep only what is true</small></h2><div id="rewrites"></div></div>
+        <details class="method">
+          <summary>How this score is built</summary>
+          <p>Skillmark is a rule-based NLP pipeline written in plain JavaScript. It splits the text into lines and tokens, reduces words to stems, finds section headings, matches skills and their aliases against a role profile, and measures keyword overlap with a job description. The 1 to 10 rating is the weighted total divided by ten. It estimates what an ATS and a recruiter skim for. It is not any vendor's real ATS, so treat it as a checklist.</p>
+          <div class="tscroll"><table>
+            <tr><th>Area</th><th>Weight</th><th>What it checks</th></tr>
+            <tr><td>Skills match</td><td>30%</td><td>Core and bonus skills for the role, plus job description keywords when given</td></tr>
+            <tr><td>Impact &amp; numbers</td><td>20%</td><td>Share of bullets that state a measurable result</td></tr>
+            <tr><td>Language</td><td>15%</td><td>Strong opening verbs, weak phrases, clichés, first-person wording</td></tr>
+            <tr><td>Structure</td><td>15%</td><td>Skills, education, experience or projects, summary, extras</td></tr>
+            <tr><td>Contact &amp; links</td><td>10%</td><td>Email, phone, LinkedIn, GitHub</td></tr>
+            <tr><td>Length &amp; readability</td><td>10%</td><td>Word count and bullet length</td></tr>
+          </table></div>
+        </details>
+      </div>
+    </section>
+  </div>
+
+  <div class="foot"><span>Your résumé text stays in this page. Nothing is uploaded or stored.</span><span>Skill list: AI/ML, data and web roles. Scores are estimates.</span></div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
