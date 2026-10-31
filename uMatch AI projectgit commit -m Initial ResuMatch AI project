@@ -1,0 +1,25 @@
+ .gitignore                        |   29 [32m+[m
+ backend/main.py                   | 1211 [32m+++++++++++++++++++++++++++++++++[m
+ backend/nlp.py                    |  633 [32m++++++++++++++++++[m
+ backend/requirements.txt          |    8 [32m+[m
+ backend/semantic_matcher.py       |  216 [32m++++++[m
+ frontend/app.js                   |  434 [32m++++++++++++[m
+ frontend/index.html               |  103 [32m+++[m
+ frontend/style.css                |  160 [32m+++++[m
+ resumatch-ai/.gitignore           |   24 [32m+[m
+ resumatch-ai/.oxlintrc.json       |    8 [32m+[m
+ resumatch-ai/README.md            |   16 [32m+[m
+ resumatch-ai/index.html           |   13 [32m+[m
+ resumatch-ai/package-lock.json    | 1316 [32m++++++++++++++++++++++++++++++++++++[m
+ resumatch-ai/package.json         |   23 [32m+[m
+ resumatch-ai/public/favicon.svg   |    1 [32m+[m
+ resumatch-ai/public/icons.svg     |   24 [32m+[m
+ resumatch-ai/src/App.css          |  497 [32m++++++++++++++[m
+ resumatch-ai/src/App.jsx          | 1339 [32m+++++++++++++++++++++++++++++++++++++[m
+ resumatch-ai/src/assets/hero.png  |  Bin [31m0[m -> [32m13057[m bytes
+ resumatch-ai/src/assets/react.svg |    1 [32m+[m
+ resumatch-ai/src/assets/vite.svg  |    1 [32m+[m
+ resumatch-ai/src/index.css        |  111 [32m+++[m
+ resumatch-ai/src/main.jsx         |   10 [32m+[m
+ resumatch-ai/vite.config.js       |    7 [32m+[m
+ 24 files changed, 6185 insertions(+)
