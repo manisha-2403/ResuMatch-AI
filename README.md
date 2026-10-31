@@ -29,6 +29,8 @@ Do not commit API keys or `.env` files.
 
 - After Resume Analysis
 
+<img width="1600" height="722" alt="Screenshot 2026-10-31 142233" src="https://github.com/user-attachments/assets/78070ad3-b4cc-40c9-a9ae-a286642a9fdf" />
+
 <img width="1600" height="702" alt="Screenshot 2026-10-31 142259" src="https://github.com/user-attachments/assets/d407727c-3dcb-49cb-8b4e-429aef95b109" />
 
 <img width="1600" height="712" alt="Screenshot 2026-10-31 142336" src="https://github.com/user-attachments/assets/d2535b43-6e2a-41c0-8516-c73c68cade78" />
