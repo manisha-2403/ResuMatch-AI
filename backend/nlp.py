@@ -3,7 +3,12 @@ import re
 from typing import Any
 
 from semantic_matcher import find_semantic_matches
+import os
 
+if os.getenv("ENABLE_SEMANTIC_MATCHING", "false").lower() == "true":
+    from semantic_matcher import find_semantic_matches
+else:
+    find_semantic_matches = None
 
 # Canonical skill name: alternative terms used in resumes and job descriptions.
 SKILL_LIBRARY = {
@@ -574,11 +579,13 @@ def analyze_match(resume_text: str, job_description: str) -> dict[str, Any]:
         for skill in missing
     ]
 
+semantic_candidates = []
+
+if find_semantic_matches is not None:
     semantic_candidates = find_semantic_matches(
         resume_text=supporting_text,
         required_skills=semantic_requirements,
     )
-
     suggestions = []
 
     if not skills_section_found:
