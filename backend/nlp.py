@@ -1,8 +1,6 @@
 
 import re
 from typing import Any
-
-from semantic_matcher import find_semantic_matches
 import os
 
 if os.getenv("ENABLE_SEMANTIC_MATCHING", "false").lower() == "true":
