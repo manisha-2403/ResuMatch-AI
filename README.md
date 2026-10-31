@@ -21,7 +21,8 @@ Do not commit API keys or `.env` files.
 
 ## Screenshots
 
-- ResuMatch AI homepage : <img width="1600" height="712" alt="image" src="https://github.com/user-attachments/assets/42aa6f3b-8861-48cb-ab1e-4f4c51691f94" />
+- ResuMatch AI homepage : <img width="1600" height="695" alt="Screenshot 2026-10-31 141739" src="https://github.com/user-attachments/assets/137101aa-ad91-44aa-8efc-26cdc3940c96" />
+
 
 <img width="1600" height="702" alt="Screenshot 2026-10-31 141855" src="https://github.com/user-attachments/assets/f2cc1517-7bdf-47c9-9d89-12815ceab3eb" />
 
