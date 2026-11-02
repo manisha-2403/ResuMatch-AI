@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import './App.css'
 
-const API_URL = 'http://127.0.0.1:8000'
+const API_BASE_URL = "https://resumatch-ai-ymk2.onrender.com";
 const MAX_FILE_SIZE = 5 * 1024 * 1024
 
 // --------------------------------------------------
