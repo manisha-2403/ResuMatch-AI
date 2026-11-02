@@ -5,4 +5,3 @@ pymupdf
 python-docx
 python-dotenv
 groq
-sentence-transformers
