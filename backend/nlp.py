@@ -1,15 +1,12 @@
 
 import re
 from typing import Any
-
 import os
 
 if os.getenv("ENABLE_SEMANTIC_MATCHING", "false").lower() == "true":
     from semantic_matcher import find_semantic_matches
 else:
     find_semantic_matches = None
-
-
 
 
 # Canonical skill name: alternative terms used in resumes and job descriptions.
@@ -587,6 +584,7 @@ def analyze_match(resume_text: str, job_description: str) -> dict[str, Any]:
             resume_text=supporting_text,
             required_skills=semantic_requirements,
         )
+
 
     suggestions = []
 
