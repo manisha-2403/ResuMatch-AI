@@ -1,12 +1,9 @@
 import { useRef, useState } from 'react'
 import './App.css'
 
-const API_BASE_URL = "https://resumatch-ai-ymk2.onrender.com";
+const API_URL = 'https://resumatch-ai-ymk2.onrender.com'
 const MAX_FILE_SIZE = 5 * 1024 * 1024
 
-// --------------------------------------------------
-// ICON COMPONENT
-// --------------------------------------------------
 
 function Icon({ type, size = 20 }) {
   const shapes = {
